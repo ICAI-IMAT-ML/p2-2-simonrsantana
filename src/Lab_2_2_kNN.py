@@ -18,9 +18,7 @@ def minkowski_distance(a, b, p=2):
     Returns:
         float: Minkowski distance between arrays a and b.
     """
-
-    # TODO
-
+    return (a - b)
 
 # k-Nearest Neighbors Model
 
@@ -50,7 +48,7 @@ class knn:
             k (int, optional): Number of neighbors to use. Defaults to 5.
             p (int, optional): The degree of the Minkowski distance. Defaults to 2.
         """
-        # TODO
+    # TODO
 
     def predict(self, X: np.ndarray) -> np.ndarray:
         """
@@ -62,7 +60,7 @@ class knn:
         Returns:
             np.ndarray: Predicted class labels.
         """
-        # TODO
+    # TODO
 
     def predict_proba(self, X):
         """
@@ -77,7 +75,7 @@ class knn:
         Returns:
             np.ndarray: Predicted class probabilities.
         """
-        # TODO
+    # TODO
 
     def compute_distances(self, point: np.ndarray) -> np.ndarray:
         """Compute distance from a point to every point in the training dataset
@@ -113,8 +111,8 @@ class knn:
         Returns:
             int: most common label
         """
-        # TODO
-
+    # TODO
+    
     def __str__(self):
         """
         String representation of the kNN model.
@@ -143,54 +141,7 @@ def plot_2Dmodel_predictions(X, y, model, grid_points_n):
     Note:
         - This function assumes binary classification and that the model's 'predict_proba' method returns probabilities for the positive class in the second column.
     """
-    # Map string labels to numeric
-    unique_labels = np.unique(y)
-    num_to_label = {i: label for i, label in enumerate(unique_labels)}
-
-    # Predict on input data
-    preds = model.predict(X)
-
-    # Determine TP, FP, FN, TN
-    tp = (y == unique_labels[1]) & (preds == unique_labels[1])
-    fp = (y == unique_labels[0]) & (preds == unique_labels[1])
-    fn = (y == unique_labels[1]) & (preds == unique_labels[0])
-    tn = (y == unique_labels[0]) & (preds == unique_labels[0])
-
-    # Plotting
-    fig, ax = plt.subplots(1, 2, figsize=(12, 5))
-
-    # Classification Results Plot
-    ax[0].scatter(X[tp, 0], X[tp, 1], color="green", label=f"True {num_to_label[1]}")
-    ax[0].scatter(X[fp, 0], X[fp, 1], color="red", label=f"False {num_to_label[1]}")
-    ax[0].scatter(X[fn, 0], X[fn, 1], color="blue", label=f"False {num_to_label[0]}")
-    ax[0].scatter(X[tn, 0], X[tn, 1], color="orange", label=f"True {num_to_label[0]}")
-    ax[0].set_title("Classification Results")
-    ax[0].legend()
-
-    # Create a mesh grid
-    x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
-    y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
-    xx, yy = np.meshgrid(
-        np.linspace(x_min, x_max, grid_points_n),
-        np.linspace(y_min, y_max, grid_points_n),
-    )
-
-    # # Predict on mesh grid
-    grid = np.c_[xx.ravel(), yy.ravel()]
-    probs = model.predict_proba(grid)[:, 1].reshape(xx.shape)
-
-    # Use Seaborn for the scatter plot
-    sns.scatterplot(x=X[:, 0], y=X[:, 1], hue=y, palette="Set1", ax=ax[1])
-    ax[1].set_title("Classes and Estimated Probability Contour Lines")
-
-    # Plot contour lines for probabilities
-    cnt = ax[1].contour(xx, yy, probs, levels=np.arange(0, 1.1, 0.1), colors="black")
-    ax[1].clabel(cnt, inline=True, fontsize=8)
-
-    # Show the plot
-    plt.tight_layout()
-    plt.show()
-
+    # TODO
 
 
 def evaluate_classification_metrics(y_true, y_pred, positive_label):
@@ -213,26 +164,6 @@ def evaluate_classification_metrics(y_true, y_pred, positive_label):
         - Specificity: TN / (TN + FP)
         - F1 Score: 2 * (Precision * Recall) / (Precision + Recall)
     """
-    # Map string labels to 0 or 1
-    y_true_mapped = np.array([1 if label == positive_label else 0 for label in y_true])
-    y_pred_mapped = np.array([1 if label == positive_label else 0 for label in y_pred])
-
-    # Confusion Matrix
-    # TODO
-
-    # Accuracy
-    # TODO
-
-    # Precision
-    # TODO
-
-    # Recall (Sensitivity)
-    # TODO
-
-    # Specificity
-    # TODO
-
-    # F1 Score
     # TODO
 
     return {
